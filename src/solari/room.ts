@@ -84,6 +84,37 @@ async function waitReady(d: Desktop) {
   throw new Error("The Room did not become ready within 30 s")
 }
 
+const EDITOR_SETTINGS = `${HOME}/.config/Code/User/settings.json`
+
+/**
+ * collect() can only take what is on disk. In a demo on 2026-10-09 the Candidate
+ * never saved, and the hidden tests ran on the untouched starter. So VS Code saves
+ * by itself a second after each edit. Workspace trust is off, or the task folder
+ * opens in Restricted Mode with a banner across the top.
+ */
+async function configureEditor(d: Desktop) {
+  // As the Candidate, so the new folders belong to them and VS Code can write there.
+  await sh(d, asUser(`mkdir -p ${dirname(EDITOR_SETTINGS)}`))
+  let settings: Record<string, unknown> = {}
+  const raw = await d.fs.read(EDITOR_SETTINGS).then((b) => new TextDecoder().decode(b), () => undefined)
+  if (raw !== undefined) {
+    try {
+      settings = JSON.parse(raw)
+    } catch {
+      // Comments or trailing commas: keep the template's file next to ours.
+      await d.fs.write(`${EDITOR_SETTINGS}.bak`, new TextEncoder().encode(raw))
+    }
+  }
+  settings = {
+    ...settings,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "security.workspace.trust.enabled": false,
+  }
+  await d.fs.write(EDITOR_SETTINGS, new TextEncoder().encode(JSON.stringify(settings, null, 2)))
+  await sh(d, `chown ${USER}:${USER} ${EDITOR_SETTINGS}*`)
+}
+
 export async function openRoom(task: Task, interviewId: string): Promise<OpenedRoom> {
   const d = await desktops().create({
     template: "code", // VS Code, Git and Python 3.10. No Node, Cursor or Claude Code.
@@ -118,6 +149,7 @@ export async function openRoom(task: Task, interviewId: string): Promise<OpenedR
       ),
     )
 
+    await configureEditor(d)
     await d.record.start({ fps: 10 })
     await d.open("code", [TASK_DIR])
     open.set(d.id, d)
