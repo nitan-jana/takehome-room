@@ -154,6 +154,10 @@ function HowItWorks() {
                     width={step.shot.width}
                     height={step.shot.height}
                     loading="lazy"
+                    // A copy without the screenshots shows the step's text only.
+                    onError={(e) => {
+                      e.currentTarget.parentElement!.hidden = true
+                    }}
                   />
                 </picture>
               )}
