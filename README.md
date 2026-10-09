@@ -4,14 +4,36 @@ Take-home coding interviews in a real desktop. The candidate works in a recorded
 
 Built on [Solari](https://getsolari.com): each interview gets its own Solari desktop, and the hidden tests run in a fresh Solari sandbox.
 
+<picture>
+  <source srcset="web/public/screenshots/desktop-dark.webp" media="(prefers-color-scheme: dark)">
+  <img src="web/public/screenshots/desktop-light.webp" alt="The candidate at work in VS Code inside the remote desktop, under the bar with the work clock and the Submit button" width="720">
+</picture>
+
 ## How an interview works
 
 1. The reviewer creates an interview on the `/admin` page and gets two links. The reviewer sends the candidate link and keeps the reviewer link.
+
+   <picture>
+     <source srcset="web/public/screenshots/admin-dark.webp" media="(prefers-color-scheme: dark)">
+     <img src="web/public/screenshots/admin-light.webp" alt="The reviewer page, with the form to create an interview, the two new links, and the list of interviews" width="560">
+   </picture>
+
 2. The candidate opens their link, agrees to the screen recording, and opens the desktop. It has VS Code, Git, and Python, with the task's starter files already committed.
+
+   <picture>
+     <source srcset="web/public/screenshots/candidate-dark.webp" media="(prefers-color-scheme: dark)">
+     <img src="web/public/screenshots/candidate-light.webp" alt="The candidate page, with the two clocks, the recording notice, and the button to open the desktop" width="560">
+   </picture>
+
 3. Setup time (10 minutes by default) does not count. If the candidate presses Start, or if setup time ends, the work clock starts.
 4. The interview ends at Submit or at the end of the clock. Then the server stops the recording, takes the task folder out of the desktop, and kills the desktop.
 5. The hidden tests run against a copy of that folder in a new sandbox. They never enter the candidate's desktop.
 6. The reviewer link shows the score, the video, the commits, the test output, and a download of the final folder.
+
+   <picture>
+     <source srcset="web/public/screenshots/report-dark.webp" media="(prefers-color-scheme: dark)">
+     <img src="web/public/screenshots/report-light.webp" alt="A report: 7 of 9 hidden tests passed, the time used, the recording of the desktop, the commits, and the hidden test output" width="560">
+   </picture>
 
 The server owns the clock. The timer in the browser is only a display.
 
