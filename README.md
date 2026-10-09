@@ -4,6 +4,8 @@ Take-home coding interviews in a real desktop. The candidate works in a recorded
 
 Built on [Solari](https://getsolari.com): each interview gets its own Solari desktop, and the hidden tests run in a fresh Solari sandbox.
 
+Try it as the candidate at [takehome.nitanjana.com](https://takehome.nitanjana.com). The demo is a shorter task, and you get the reviewer's report for your own attempt at the end.
+
 <picture>
   <source srcset="web/public/screenshots/desktop-dark.webp" media="(prefers-color-scheme: dark)">
   <img src="web/public/screenshots/desktop-light.webp" alt="The candidate at work in VS Code inside the remote desktop, under the bar with the work clock and the Submit button" width="720">
