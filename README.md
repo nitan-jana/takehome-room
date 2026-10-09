@@ -52,7 +52,7 @@ The server owns the clock. The timer in the browser is only a display.
 
 ## Run it locally
 
-You need Node 22.9 or later and a Solari API key from [console.getsolari.com](https://console.getsolari.com). The free plan works.
+You need Node 22.9 or later, pnpm, and a Solari API key from [console.getsolari.com](https://console.getsolari.com). The free plan works. If you do not have pnpm, run `corepack enable` first.
 
 ```bash
 pnpm install
