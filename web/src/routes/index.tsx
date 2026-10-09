@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { demoQuery, explain, startDemo, type DemoStatus } from '../api'
 import { Rail } from '../components/Rail'
+import { SiteNav } from '../components/SiteNav'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -10,9 +11,9 @@ export const Route = createFileRoute('/')({ component: Home })
 function Home() {
   const demo = useQuery(demoQuery())
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16 sm:py-24">
-      <p className="font-mono text-xs tracking-wide text-graphite uppercase">takehome-room</p>
-      <h1 className="display mt-3 text-4xl leading-[1.05] font-extrabold sm:text-5xl">
+    <main className="mx-auto max-w-3xl px-4 pt-6 pb-16 sm:pb-24">
+      <SiteNav />
+      <h1 className="display mt-14 text-4xl sm:mt-20 leading-[1.05] font-extrabold sm:text-5xl">
         Take-home interviews in a real desktop
       </h1>
       <p className="mt-5 max-w-2xl text-lg text-graphite">
@@ -45,7 +46,7 @@ function DemoCard({ status }: { status: DemoStatus }) {
   const waitMinutes = Math.ceil((status.retryAfterSeconds ?? 0) / 60)
 
   return (
-    <section className="mt-10 rounded-xl border border-rule bg-sheet p-5 sm:p-6">
+    <section id="demo" className="mt-10 scroll-mt-6 rounded-xl border border-rule bg-sheet p-5 sm:p-6">
       <h2 className="display text-lg font-bold">Try it as the candidate</h2>
       <p className="mt-2 text-graphite">
         A short version of a real task: {setup} minutes to settle in, then {work} minutes on the clock. Afterwards you
@@ -132,7 +133,7 @@ const STEPS: Step[] = [
 
 function HowItWorks() {
   return (
-    <section className="mt-16">
+    <section id="how-it-works" className="mt-16 scroll-mt-6">
       <h2 className="display text-2xl font-bold">How an interview works</h2>
       <ol className="mt-8 space-y-12">
         {STEPS.map((step, i) => (

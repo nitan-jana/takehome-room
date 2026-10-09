@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ApiError, createInterview, interviewsQuery, tasksQuery, type InterviewSummary, type TaskSummary } from '../api'
+import { SiteNav } from '../components/SiteNav'
 
 export const Route = createFileRoute('/admin')({ component: AdminPage })
 
@@ -77,8 +78,9 @@ function AdminPage() {
 
 function Shell({ children, onSignOut }: { children: React.ReactNode; onSignOut?: () => void }) {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
-      <div className="flex items-end justify-between gap-4">
+    <main className="mx-auto max-w-4xl px-4 pt-6 pb-12 sm:pb-16">
+      <SiteNav />
+      <div className="mt-10 flex items-end justify-between gap-4">
         <div>
           <p className="font-mono text-xs tracking-wide text-graphite uppercase">Reviewer</p>
           <h1 className="display mt-2 text-3xl font-extrabold sm:text-4xl">Interviews</h1>
